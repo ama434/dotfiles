@@ -17,11 +17,16 @@ if [ -f '/Users/ama_434/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then .
 
 alias ls='eza -F'
 alias ll='eza -F -algh --git --icons'
+alias vim='nvim'
+alias vi='vim'
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 eval "$(sheldon source)"
-eval "$(starship init zsh)"
+
+# eval"$(starship init zsh)"
+{{- output "starship" "init" "zsh" "--print-full-init" | trim -}}
 
 
