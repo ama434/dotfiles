@@ -22,7 +22,26 @@ require("lualine").setup {
       tabline = 33,
       winbar = 33,
     },
-  }
+  },
+  sections = {
+    lualine_b = {
+      {
+        "diff",
+        symbols = { added = " ", modified = " ", removed = "" },
+      },
+    },
+    lualine_c = {
+      {
+        "filename",
+        path = 4,
+        symbols = {
+          modified = " ",
+          readonly = "󰏯 ",
+          new = " ",
+        },
+      },
+    },
+  },
 }
 
 -- encoding
