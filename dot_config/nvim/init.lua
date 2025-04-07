@@ -27,7 +27,7 @@ require("lualine").setup {
     lualine_b = {
       {
         "diff",
-        symbols = { added = " ", modified = " ", removed = "" },
+        symbols = { added = " ", modified = " ", removed = " " },
       },
     },
     lualine_c = {
