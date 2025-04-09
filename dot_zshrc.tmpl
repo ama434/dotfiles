@@ -16,8 +16,11 @@ alias ls='eza -F'
 alias ll='eza -F -algh --git --icons'
 alias vim='nvim'
 alias vi='vim'
+alias vimdiff='nvim -d'
 
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 
+# Set up fzf key bindings
+source <(fzf --zsh)
