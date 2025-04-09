@@ -1,16 +1,16 @@
 require("config.lazy")
 
 require("lazy").setup("plugins", {
-	performance = {
-		rtp = {
-			disabled_plugins = {
-				"netrw",
-				"netrwPlugin",
-				"netrwSettings",
-				"netrwFileHandlers",
-			},
-		},
-	},
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+      },
+    },
+  },
 })
 
 require("lualine").setup {
@@ -71,3 +71,6 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
+
+-- terminal
+vim.opt.sh = zsh
