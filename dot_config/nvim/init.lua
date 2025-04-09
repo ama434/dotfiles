@@ -66,6 +66,9 @@ vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', 
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
 
+-- color
+vim.opt.termguicolors = true
+
 -- search
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
