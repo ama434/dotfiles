@@ -1,43 +1,7 @@
--- auto command
-require("autocmds")
-
--- encoding
-vim.opt.encoding = 'utf-8'
-vim.scriptencoding = 'utf-8'
-
--- visual
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-
-vim.opt.visualbell = true
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.list = true
-vim.opt.scrolloff = 15
-vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', nbsp = '%' }
-vim.opt.showmatch = true
-vim.opt.matchtime = 1
-
--- color
-vim.opt.termguicolors = true
-
--- search
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hlsearch = true
-
--- terminal
-vim.opt.sh = zsh
-
 -- key
 require("keymaps")
 
+-- plugins
 require("config.lazy")
 
 require("lazy").setup("plugins", {
@@ -53,9 +17,17 @@ require("lazy").setup("plugins", {
   },
 })
 
+require("catppuccin").setup {
+  flavour = "mocha",
+  background = {
+    light = "latte",
+    dark = "mocha",
+  },
+}
+
 require("lualine").setup {
   options = {
-    section_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
     refresh = {
       statusline = 33,
@@ -84,4 +56,51 @@ require("lualine").setup {
   },
 }
 
-require("bufferline").setup{}
+require("bufferline").setup{
+  options = {
+    style_preset = require("bufferline").style_preset.default,
+    separator_style = "thick",
+    numbers = function(opts)
+      return string.format('%s', opts.raise(opts.id))
+    end,
+  },
+}
+
+-- auto command
+require("autocmds")
+
+-- encoding
+vim.opt.encoding = 'utf-8'
+vim.scriptencoding = 'utf-8'
+
+-- visual
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+vim.opt.visualbell = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.list = true
+vim.opt.scrolloff = 10
+vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', nbsp = '%' }
+vim.opt.showmatch = true
+vim.opt.matchtime = 1
+
+-- color
+vim.opt.termguicolors = true
+vim.cmd.colorscheme "catppuccin"
+
+-- search
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
+
+-- terminal
+vim.opt.sh = zsh
+
