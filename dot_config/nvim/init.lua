@@ -23,6 +23,7 @@ require("catppuccin").setup {
     light = "latte",
     dark = "mocha",
   },
+  transparent_background = true,
 }
 
 require("lualine").setup {
@@ -36,10 +37,17 @@ require("lualine").setup {
     },
   },
   sections = {
-    lualine_b = {
+   lualine_b = {
+      {
+        "branch",
+        icon = '',
+      },
       {
         "diff",
         symbols = { added = " ", modified = " ", removed = " " },
+      },
+      {
+        "diagnostics",
       },
     },
     lualine_c = {
@@ -104,3 +112,6 @@ vim.opt.hlsearch = true
 -- terminal
 vim.opt.sh = zsh
 
+-- PATH
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
