@@ -18,3 +18,7 @@ macos-icon = "official"
 
 # color theme settings
 theme = "0x96f"
+
+# shell startup size
+window-height = 37
+window-width = 106

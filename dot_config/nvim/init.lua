@@ -23,7 +23,7 @@ require("catppuccin").setup {
     light = "latte",
     dark = "mocha",
   },
-  transparent_background = true,
+  transparent_background = false,
 }
 
 require("lualine").setup {
@@ -74,6 +74,8 @@ require("bufferline").setup{
   },
 }
 
+require("gitsigns").setup()
+
 -- auto command
 require("autocmds")
 
@@ -92,6 +94,8 @@ vim.opt.smartindent = true
 vim.opt.visualbell = true
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.cmd('hi clear CursorLine')
 vim.opt.list = true
 vim.opt.scrolloff = 10
 vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', nbsp = '%' }
