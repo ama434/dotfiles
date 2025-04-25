@@ -92,7 +92,6 @@ vim.opt.smartindent = true
 vim.opt.visualbell = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cursorline = true
 vim.opt.list = true
 vim.opt.scrolloff = 10
 vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', nbsp = '%' }

@@ -12,11 +12,13 @@ if [ -f '/Users/ama_434/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ama_434/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ama_434/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
+# aliases
 alias ls='eza -F'
 alias ll='eza -F -algh --git --icons'
 alias vim='nvim'
 alias vi='vim'
 alias vimdiff='nvim -d'
+alias cat='bat -pP'
 
 eval "$(sheldon source)"
 eval "$(starship init zsh)"

@@ -1,0 +1,20 @@
+# font settings
+font-family = "JetBrainsMono Nerd Font"
+font-size = 12
+font-feature = "cv01"
+font-feature = "cv08"
+font-feature = "cv10"
+font-feature = "cv11"
+font-feature = "cv12"
+font-feature = "cv20"
+font-feature = "zero"
+
+# background settings
+background-opacity = 0.9
+background-blur = 3
+
+# macOS settings
+macos-icon = "official"
+
+# color theme settings
+theme = "0x96f"
