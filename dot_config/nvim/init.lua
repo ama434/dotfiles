@@ -48,6 +48,9 @@ require("lualine").setup {
       },
       {
         "diagnostics",
+        sources = { "nvim_lsp" },
+        sections = { "error", "warn", "info", "hint" },
+        symbols = { error = ' ', warn = ' ', info = ' ', hint = '' },
       },
     },
     lualine_c = {
@@ -76,6 +79,17 @@ require("bufferline").setup{
 
 require("gitsigns").setup()
 
+require("mason").setup()
+
+require("mason-lspconfig").setup()
+require("mason-lspconfig").setup_handlers {
+  function(server_name)
+    require("lspconfig")[server_name].setup {
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    }
+  end,
+}
+
 -- auto command
 require("autocmds")
 
@@ -94,6 +108,7 @@ vim.opt.smartindent = true
 vim.opt.visualbell = true
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = 'yes'
 vim.opt.cursorline = true
 vim.cmd('hi clear CursorLine')
 vim.opt.list = true

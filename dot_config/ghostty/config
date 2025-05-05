@@ -8,6 +8,7 @@ font-feature = "cv11"
 font-feature = "cv12"
 font-feature = "cv20"
 font-feature = "zero"
+font-feature = "-dlig"
 
 # background settings
 background-opacity = 0.9

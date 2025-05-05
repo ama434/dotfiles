@@ -22,7 +22,7 @@ alias cat='bat -pP'
 
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
-eval "$(mise activate zsh --shims)"
+eval "$(mise activate zsh)"
 
 # Set up fzf key bindings
 source <(fzf --zsh)
@@ -46,6 +46,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/ama_434/.lmstudio/bin"
+# shell scripts
+export PATH="$HOME/bin:$PATH"
