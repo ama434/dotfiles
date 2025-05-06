@@ -1,0 +1,14 @@
+#!/usr/bin/env perl
+
+# 使用コマンド
+$latex = 'lualatex -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error %O %S'
+$pdf_mode = 4;
+
+if ($^o eq 'darwin') {
+  $pdf_previewer = 'open -a Preview %S';
+} elsif ($^o eq 'linux') {
+  $pdf_previewer = 'evince';
+}
+
+$preview_continuous_mode = 1;
+$pdf_update_method = 4;
