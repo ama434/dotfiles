@@ -4,5 +4,4 @@ return {
     "nvim-lua/plenary.nvim",
     "vim-test/vim-test",
   },
-  config = true,
 }
