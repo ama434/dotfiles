@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
 # 使用コマンド
-$latex = 'lualatex -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error %O %S'
+$latex = 'lualatex -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error %O %S';
 $pdf_mode = 4;
 
-if ($^o eq 'darwin') {
+if ($^O eq 'darwin') {
   $pdf_previewer = 'open -a Preview %S';
-} elsif ($^o eq 'linux') {
+} elsif ($^O eq 'linux') {
   $pdf_previewer = 'evince';
 }
 
