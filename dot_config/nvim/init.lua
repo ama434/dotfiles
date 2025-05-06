@@ -159,3 +159,8 @@ vim.opt.sh = zsh
 -- PATH
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
+-- show diagnostics info
+vim.diagnostic.config({
+  severity_sort = true,
+})
