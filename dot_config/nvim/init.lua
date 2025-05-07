@@ -142,6 +142,8 @@ vim.opt.scrolloff = 10
 vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', nbsp = '%' }
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
+vim.opt.breakindent = true
+vim.opt.showbreak = '» '
 
 -- color
 vim.opt.termguicolors = true
@@ -162,5 +164,14 @@ vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 
 -- show diagnostics info
 vim.diagnostic.config({
+  virtual_text = {
+    prefix = '',
+    source = "if_many",
+    spacing = 4,
+    severity_sort = true,
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
   severity_sort = true,
 })
