@@ -17,7 +17,7 @@ return {
     },
     -- バッファ検索
     {
-      "<leader>fb",
+      "<leader>fr",
       function() require("telescope.builtin").buffers() end,
       desc = "Telescope: バッファを検索",
     },
