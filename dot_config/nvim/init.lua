@@ -4,35 +4,6 @@ require("keymaps")
 -- plugins
 require("config.lazy")
 
-require("lazy").setup("plugins", {
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "netrw",
-        "netrwPlugin",
-        "netrwSettings",
-        "netrwFileHandlers",
-      },
-    },
-  },
-})
-
-require("bufferline").setup{
-  options = {
-    style_preset = require("bufferline").style_preset.default,
-    separator_style = "thick",
-    numbers = function(opts)
-      return string.format('%s', opts.raise(opts.id))
-    end,
-  },
-}
-
-require("fidget").setup()
-
-require("gitsigns").setup()
-
-require("mason").setup()
-
 -- lsp
 require("lsp/lsp-init")
 
@@ -67,7 +38,7 @@ vim.opt.showbreak = '» '
 
 -- color
 vim.opt.termguicolors = true
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "tokyonight"
 
 -- search
 vim.opt.incsearch = true
@@ -76,7 +47,7 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 
 -- terminal
-vim.opt.sh = zsh
+vim.opt.sh = "zsh"
 
 -- PATH
 -- Prepend mise shims to PATH

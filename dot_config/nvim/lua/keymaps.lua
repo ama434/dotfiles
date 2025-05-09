@@ -2,7 +2,7 @@
 local map = vim.api.nvim_set_keymap
 
 -- update leader key to space
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 -- Y を行末までヤンクに
 vim.keymap.set('n', 'Y', 'y$')
