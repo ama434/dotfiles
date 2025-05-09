@@ -34,7 +34,7 @@ require("gitsigns").setup()
 require("mason").setup()
 
 -- lsp
-require("lsp-init")
+require("lsp/lsp-init")
 
 -- auto command
 require("autocmds")
