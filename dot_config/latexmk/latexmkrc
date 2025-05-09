@@ -1,5 +1,8 @@
 #!/usr/bin/env perl
 
+# カレントディレクトリ変更
+$do_cd = 1;
+
 # 使用コマンド
 $latex = 'lualatex -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error %O %S';
 $pdf_mode = 4;
@@ -9,6 +12,12 @@ if ($^O eq 'darwin') {
 } elsif ($^O eq 'linux') {
   $pdf_previewer = 'evince';
 }
+
+# 出力フォルダ設定
+$out_dir = ".";
+# 中間ファイルを別フォルダに隠す
+# $emulate_aux = 1;
+# $aux_dir = ".tex_intermediates";
 
 $preview_continuous_mode = 1;
 $pdf_update_method = 4;
