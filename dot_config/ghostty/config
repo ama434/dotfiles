@@ -21,5 +21,10 @@ macos-icon = "official"
 theme = "0x96f"
 
 # shell startup size
-window-height = 37
-window-width = 106
+window-height = 40
+window-width = 144
+
+# padding
+window-padding-x = 0
+window-padding-y = 0,0
+window-padding-balance = true

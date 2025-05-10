@@ -35,5 +35,28 @@ return {
       end,
       desc = "Telescope: カスタム検索文字列で検索",
     },
-  }
+    -- ファイルブラウザを開く
+    {
+      "<leader>fb",
+      function()
+        require("telescope").extensions.file_browser.file_browser()
+      end,
+      desc = "Telescope: ファイルブラウザを開く"
+    },
+  },
+  config = function ()
+    require("telescope").setup({
+      extensions = {
+        file_browser = {
+          hijack_netrw = true,
+        },
+        fzf = {
+          fuzzy = true,
+          case_mode = "smart_case",
+        },
+      },
+    })
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("file_browser")
+  end
 }

@@ -1,3 +1,6 @@
+-- primary options
+vim.opt.termguicolors = true
+
 -- key
 require("keymaps")
 
@@ -37,7 +40,6 @@ vim.opt.breakindent = true
 vim.opt.showbreak = '» '
 
 -- color
-vim.opt.termguicolors = true
 vim.cmd.colorscheme "tokyonight"
 
 -- search
@@ -45,6 +47,13 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
+
+-- window
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+-- clipboard
+vim.opt.clipboard:append{'unnamedplus'}
 
 -- terminal
 vim.opt.sh = "zsh"

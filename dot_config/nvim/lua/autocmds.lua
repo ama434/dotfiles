@@ -20,3 +20,9 @@ autocmd({ "BufReadPost" }, {
 		vim.api.nvim_exec('silent! normal! g`"zv', false)
 	end,
 })
+
+-- ターミナルを開いたら常に insert モードに入る
+autocmd({ "TermOpen" }, {
+  pattern = { "*" },
+  command = ":startinsert",
+})
