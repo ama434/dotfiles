@@ -5,6 +5,7 @@ return {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
     "L3MON4D3/LuaSnip",
+    "onsails/lspkind.nvim",
   },
   config = function()
     local has_words_before = function()
@@ -13,6 +14,7 @@ return {
     end
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    local lspkind = require("lspkind")
     cmp.setup({
       mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -54,6 +56,21 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+
+      windows = {
+        completion = cmp.config.window.bordered({
+          border = "single",
+        }),
+        documentation = cmp.config.window.bordered({
+          border = "single",
+        }),
+      },
+
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol",
+        })
+      }
     })
   end,
 }
