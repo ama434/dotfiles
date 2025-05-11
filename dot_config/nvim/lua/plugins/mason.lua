@@ -6,6 +6,10 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      ui = {
+        border = "rounded",
+      },
+    })
   end
 }

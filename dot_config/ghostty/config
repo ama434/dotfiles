@@ -11,18 +11,20 @@ font-feature = "zero"
 font-feature = "-dlig"
 
 # background settings
-background-opacity = 0.9
+background-opacity = 0.92
 background-blur = 3
 
 # macOS settings
 macos-icon = "official"
+macos-titlebar-proxy-icon = "hidden"
 
 # color theme settings
-theme = "0x96f"
+theme = "vague"
 
-# shell startup size
+# shell startup window
 window-height = 40
 window-width = 144
+macos-non-native-fullscreen = "visible-menu"
 
 # padding
 window-padding-x = 0

@@ -1,5 +1,7 @@
 -- primary options
 vim.opt.termguicolors = true
+vim.opt.winblend = 7
+vim.opt.pumblend = 7
 
 -- key
 require("keymaps")
@@ -17,7 +19,7 @@ require("autocmds")
 vim.opt.encoding = 'utf-8'
 vim.scriptencoding = 'utf-8'
 
--- visual
+-- indent
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -25,6 +27,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+-- visual
 vim.opt.visualbell = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -40,7 +43,7 @@ vim.opt.breakindent = true
 vim.opt.showbreak = '» '
 
 -- color
-vim.cmd.colorscheme "tokyonight"
+vim.cmd.colorscheme "vague"
 
 -- search
 vim.opt.incsearch = true

@@ -4,6 +4,7 @@ return {
   dependencies = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
     "L3MON4D3/LuaSnip",
     "onsails/lspkind.nvim",
   },
@@ -49,6 +50,7 @@ return {
       sources = cmp.config.sources {
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "buffer" },
       },
 
       snippet = {

@@ -1,4 +1,5 @@
 return {
+  enabled = true,
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
@@ -13,7 +14,7 @@ return {
     "rcarriga/nvim-notify",
   },
   config = function ()
-  	require("noice").setup({
+    require("noice").setup({
       lsp = {
         hover = {
           enabled = false,
