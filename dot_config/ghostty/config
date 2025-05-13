@@ -12,14 +12,17 @@ font-feature = "-dlig"
 
 # background settings
 background-opacity = 0.92
-background-blur = 3
+background-blur = 6
 
 # macOS settings
 macos-icon = "official"
 macos-titlebar-proxy-icon = "hidden"
 
 # color theme settings
-theme = "vague"
+theme = "catppuccin-mocha.conf"
+# installed themes:
+# - vague
+#
 
 # shell startup window
 window-height = 40

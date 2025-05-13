@@ -13,6 +13,13 @@ return {
 		  },
 		},
 		sections = {
+      lualine_a = {
+        {
+          "mode",
+          icons_enabled = true,
+          icon = "",
+        },
+      },
 		 lualine_b = {
 		    {
 		      "branch",

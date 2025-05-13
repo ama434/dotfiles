@@ -1,7 +1,7 @@
 -- primary options
 vim.opt.termguicolors = true
-vim.opt.winblend = 7
-vim.opt.pumblend = 7
+vim.opt.winblend = vim.g.transparent_enabled and 0 or 7
+vim.opt.pumblend = vim.g.transparent_enabled and 0 or 7
 
 -- key
 require("keymaps")
@@ -36,14 +36,14 @@ vim.opt.cursorline = true
 vim.cmd('hi clear CursorLine')
 vim.opt.list = true
 vim.opt.scrolloff = 10
-vim.opt.listchars = { tab = '|.', trail = '-', extends = '»', precedes = '«', nbsp = '%' }
+vim.opt.listchars = { tab = '|•', trail = '—', extends = '»', precedes = '«', nbsp = '%', eol = "" }
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
 vim.opt.breakindent = true
 vim.opt.showbreak = '» '
 
 -- color
-vim.cmd.colorscheme "vague"
+vim.cmd.colorscheme "catppuccin-mocha"
 
 -- search
 vim.opt.incsearch = true
