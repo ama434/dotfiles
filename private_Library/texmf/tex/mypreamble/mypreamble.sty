@@ -1,0 +1,79 @@
+% パッケージ読み込み
+
+% \usepackage{jbusinessdoc} % jbusinessdoc.sty が必要（zw を \zw に置換）
+\usepackage{luatexja-fontspec}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[
+  math-style=TeX,
+  bold-style=ISO,
+  sans-style=upright,
+  warnings-off={mathtools-colon,mathtools-overbracket}, % \overbracket と \coloneqq などの警告を消す
+]{unicode-math}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{array,booktabs}
+\usepackage{pxrubrica}
+\usepackage[unicode,hidelinks,pdfusetitle]{hyperref}
+
+% フォント設定
+% デフォルトフォントとして字游工房の基本書体 + New Computer Modern を使用（unicode-math 前提）
+\setmainjfont{YuMinPr6N}[
+  YokoFeatures={JFM=jlreq},
+  TateFeatures={JFM=jlreqv},
+  UprightFont={*-Regular},
+  BoldFont={YuGoPr6N-Bold},
+]
+\setsansjfont{YuGoPr6N}[
+  YokoFeatures={JFM=jlreq},
+  TateFeatures={JFM=jlreqv},
+  UprightFont={*-Regular},
+  BoldFont={*-Bold},
+]
+\setmainfont{NewCM10}[
+  UprightFont={*-Book},
+  ItalicFont={*-Italic},
+  BoldFont={*-Bold},
+  BoldItalicFont={*-BoldItalic},
+]
+\setmathfont{NewCMMath-Book}
+\setmathfont{NewCMMath-Book}[
+    range = {scr, bfscr},
+    StylisticSet = 1,
+]
+\setsansfont{TeXGyreHeros}[
+  UprightFont={*-Regular},
+  BoldFont={*-Bold},
+  Script=Default,
+  Ligatures=TeX,
+  Kerning=On,
+]
+
+% 追加パッケージ
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{physics2}
+\usephysicsmodule{
+  ab,
+  diagmat,
+  xmat,
+  bm-um.legacy, % \usepackage{bm} のかわり
+  nabla.legacy,
+  op.legacy
+}
+\usepackage{diffcoeff}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{circuitikz}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{calc}
+\usepackage{capt-of}
+
+% TikZ/PGF設定
+\usetikzlibrary{arrows,shapes,positioning,calc,decorations.pathmorphing,shapes.geometric,shapes.misc}
+\pgfplotsset{compat=1.18}
+
+% 数式環境
+\renewcommand{\labelenumii}{(\arabic{enumii}) }

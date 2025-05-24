@@ -11,7 +11,6 @@ $git_branch\
 $git_status\
 [](fg:surface0)\
 $c\
-$cpp\
 $rust\
 $golang\
 $nodejs\
@@ -140,11 +139,11 @@ symbol = ""
 style = ""
 format = '[[ $symbol( $name $version) ](fg:text)]($style)'
 
-[cpp]
-symbol = ""
-style = ""
-format = '[[ $symbol( $name $version) ](fg:text)]($style)'
-disabled = false
+# [cpp]
+# symbol = ""
+# style = ""
+# format = '[[ $symbol( $name $version) ](fg:text)]($style)'
+# disabled = false
 
 [rust]
 symbol = ""

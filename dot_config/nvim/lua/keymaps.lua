@@ -13,6 +13,7 @@ vim.keymap.set('n', '<C-k>', ':bn<CR>')
 
 -- 行末移動
 vim.keymap.set('n', '<Space>l', '$')
+vim.keymap.set('v', '<Space>l', '$')
 
 -- U で Redo
 vim.keymap.set('n', 'U', '<C-r>')

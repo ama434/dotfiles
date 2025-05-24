@@ -10,8 +10,9 @@ return {
   },
   config = function()
     local has_words_before = function()
+      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+      return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
     end
     local cmp = require("cmp")
     local luasnip = require("luasnip")
@@ -22,7 +23,7 @@ return {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<S-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -51,6 +52,7 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
+        { name = "copilot" },
       },
 
       snippet = {
@@ -71,8 +73,12 @@ return {
       formatting = {
         format = lspkind.cmp_format({
           mode = "symbol",
+          max_width = 50,
+          symbol_map = {
+            Copilot = "",
+          },
         })
-      }
+      },
     })
   end,
 }
