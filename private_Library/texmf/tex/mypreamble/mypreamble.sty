@@ -1,79 +1,91 @@
-% パッケージ読み込み
-
-% \usepackage{jbusinessdoc} % jbusinessdoc.sty が必要（zw を \zw に置換）
+% --- 基盤（日本語・フォント） ---
 \usepackage{luatexja-fontspec}
+\usepackage[
+  haranoaji,
+  jis2004,
+  match,
+  deluxe,
+  bold,
+  jfm_yoko=jlreq,
+  jfm_tate=jlreqv,
+]{luatexja-preset}
+\usepackage{luatexja-ruby}
+
+% --- 基本パッケージ ---
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% --- 数式・理科系 ---
 \usepackage{mathtools}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[
   math-style=TeX,
   bold-style=ISO,
   sans-style=upright,
-  warnings-off={mathtools-colon,mathtools-overbracket}, % \overbracket と \coloneqq などの警告を消す
+  warnings-off={mathtools-colon,mathtools-overbracket}
 ]{unicode-math}
-\usepackage{graphicx}
-\usepackage{siunitx}
-\usepackage{xcolor}
-\usepackage{array,booktabs}
-\usepackage{pxrubrica}
-\usepackage[unicode,hidelinks,pdfusetitle]{hyperref}
+\usepackage{siunitx}     % ← unicode-mathの後
+\usepackage{mhchem}
+\usepackage{physics2}
+\usephysicsmodule{
+  ab, diagmat, xmat, bm-um.legacy, nabla.legacy, op.legacy
+}
+\usepackage{diffcoeff}
+\usepackage{systeme}
 
-% フォント設定
-% デフォルトフォントとして字游工房の基本書体 + New Computer Modern を使用（unicode-math 前提）
-\setmainjfont{YuMinPr6N}[
-  YokoFeatures={JFM=jlreq},
-  TateFeatures={JFM=jlreqv},
-  UprightFont={*-Regular},
-  BoldFont={YuGoPr6N-Bold},
-]
-\setsansjfont{YuGoPr6N}[
-  YokoFeatures={JFM=jlreq},
-  TateFeatures={JFM=jlreqv},
-  UprightFont={*-Regular},
-  BoldFont={*-Bold},
-]
+% --- 欧文・数式フォント指定 ---
 \setmainfont{NewCM10}[
-  UprightFont={*-Book},
+  UprightFont={*-Regular},
   ItalicFont={*-Italic},
   BoldFont={*-Bold},
   BoldItalicFont={*-BoldItalic},
 ]
-\setmathfont{NewCMMath-Book}
-\setmathfont{NewCMMath-Book}[
-    range = {scr, bfscr},
-    StylisticSet = 1,
-]
-\setsansfont{TeXGyreHeros}[
-  UprightFont={*-Regular},
-  BoldFont={*-Bold},
-  Script=Default,
-  Ligatures=TeX,
-  Kerning=On,
-]
+\setmathfont{NewCMMath-Regular}
+\setmathfont{NewCMMath-Regular}[range={scr,bfscr}, StylisticSet=1]
 
-% 追加パッケージ
+% --- 表・箇条書き ---
+\usepackage{tabularray}
 \usepackage{enumitem}
 \usepackage{float}
-\usepackage{physics2}
-\usephysicsmodule{
-  ab,
-  diagmat,
-  xmat,
-  bm-um.legacy, % \usepackage{bm} のかわり
-  nabla.legacy,
-  op.legacy
-}
-\usepackage{diffcoeff}
+\usepackage{calc}
+
+% --- 描画・図表 ---
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{circuitikz}
-\usepackage{algorithmic}
-\usepackage{algorithm}
-\usepackage{calc}
-\usepackage{capt-of}
 
-% TikZ/PGF設定
+% --- 装飾・枠組み ---
+\usepackage{tcolorbox}
+\usepackage{capt-of}
+\usepackage{lua-ul}
+
+% --- アルゴリズム ---
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% --- ハイパーリンク ---
+\usepackage[
+  luatex,
+  pdfencoding=auto,
+  unicode,
+  hidelinks,
+  pdfusetitle
+]{hyperref}   % 必ず一番最後
+
+% --- TikZ/PGF 設定 ---
 \usetikzlibrary{arrows,shapes,positioning,calc,decorations.pathmorphing,shapes.geometric,shapes.misc}
 \pgfplotsset{compat=1.18}
 
-% 数式環境
+% --- 数式・ラベル ---
 \renewcommand{\labelenumii}{(\arabic{enumii}) }
+
+% --- カスタムコマンド ---
+\renewcommand{\emph}[1]{\textbf{\textsf{#1}}}
+\newcommand{\bhline}[1]{\noalign{\hrule height #1}}
+\newcommand{\bvline}[1]{\vrule width #1}
+\makeatletter
+  \renewcommand{\@biblabel}[1]{#1)}
+  \renewcommand{\@cite}[2]{\textsuperscript{#1)}}
+\makeatother
+
+\setlength{\belowcaptionskip}{6pt}
