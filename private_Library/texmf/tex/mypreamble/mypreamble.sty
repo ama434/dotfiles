@@ -13,7 +13,8 @@
 
 % --- 基本パッケージ ---
 \usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage{xcolor,luacolor}
+\usepackage{multicol}
 
 % --- 数式・理科系 ---
 \usepackage{mathtools}
@@ -24,8 +25,8 @@
   sans-style=upright,
   warnings-off={mathtools-colon,mathtools-overbracket}
 ]{unicode-math}
-\usepackage{siunitx}     % ← unicode-mathの後
-\usepackage{mhchem}
+\usepackage[per-mode=symbol]{siunitx}     % ← unicode-mathの後
+\usepackage[version=4]{mhchem}
 \usepackage{physics2}
 \usephysicsmodule{
   ab, diagmat, xmat, bm-um.legacy, nabla.legacy, op.legacy
@@ -34,14 +35,14 @@
 \usepackage{systeme}
 
 % --- 欧文・数式フォント指定 ---
-\setmainfont{NewCM10}[
-  UprightFont={*-Regular},
-  ItalicFont={*-Italic},
-  BoldFont={*-Bold},
-  BoldItalicFont={*-BoldItalic},
-]
-\setmathfont{NewCMMath-Regular}
-\setmathfont{NewCMMath-Regular}[range={scr,bfscr}, StylisticSet=1]
+% \setmainfont{NewCM10}[
+%   UprightFont={*-Regular},
+%   ItalicFont={*-Italic},
+%   BoldFont={*-Bold},
+%   BoldItalicFont={*-BoldItalic},
+% ]
+% \setmathfont{NewCMMath-Regular}
+% \setmathfont{NewCMMath-Regular}[range={scr,bfscr}, StylisticSet=1]
 
 % --- 表・箇条書き ---
 \usepackage{tabularray}
@@ -63,6 +64,10 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
+% --- 重要語句・参考文献 ---
+% \usepackage{makeidx}
+% \makeindex
+
 % --- ハイパーリンク ---
 \usepackage[
   luatex,
@@ -80,12 +85,29 @@
 \renewcommand{\labelenumii}{(\arabic{enumii}) }
 
 % --- カスタムコマンド ---
+
+% \emph{} を太字のサンセリフ体に変更
 \renewcommand{\emph}[1]{\textbf{\textsf{#1}}}
+
+% 太さを変えられる罫線
 \newcommand{\bhline}[1]{\noalign{\hrule height #1}}
 \newcommand{\bvline}[1]{\vrule width #1}
+
+% 文献番号を上付きの「番号)」に
 \makeatletter
   \renewcommand{\@biblabel}[1]{#1)}
   \renewcommand{\@cite}[2]{\textsuperscript{#1)}}
 \makeatother
 
+% 索引語
+\newcommand*{\term}[2][]{%
+  \highLight{#2}%
+  \ifx\relax#1\relax
+    \index{#2}%
+  \else
+    \index{#1@#2}%
+  \fi
+}
+
+% キャプションの下に 6pt のスペースを追加
 \setlength{\belowcaptionskip}{6pt}
