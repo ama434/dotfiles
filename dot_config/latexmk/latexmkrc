@@ -6,9 +6,10 @@ $do_cd = 1;
 # 使用コマンド
 $latex = 'lualatex -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error %O %S';
 $pdf_mode = 4;
+$makeindex = 'upmendex %O -o %D %S';
 
 if ($^O eq 'darwin') {
-  $pdf_previewer = 'open -a Preview %S';
+  $pdf_previewer = 'open -ga /Applications/Skim/app';
 } elsif ($^O eq 'linux') {
   $pdf_previewer = 'evince';
 }
@@ -21,3 +22,5 @@ $out_dir = ".";
 
 $preview_continuous_mode = 1;
 $pdf_update_method = 4;
+$clean_ext = 'acn acr alg aux bbl blg fdb_latexmk fls glo gls idx ilg ind lof log lot ltjruby out toc synctex.gz xdy';
+$success_cmd = "/bin/bash ~/.config/latexmk/reload_skim.sh $out_dir/%B.pdf"
