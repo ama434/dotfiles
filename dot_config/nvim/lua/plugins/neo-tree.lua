@@ -6,10 +6,20 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
-  lazy = false,
+  lazy = true,
+  cmd = { "Neotree" }, -- コマンドで呼び出されたときのみ読み込み
+  keys = {
+    {
+      "<leader>nn",
+      ":Neotree toggle<CR>",
+      desc = "Neo-tree: ファイルツリーを開閉",
+    },
+  },
   ---@module "neo-tree"
   ---@type neotree.config?
   opts = {
-
+    filesystem = {
+      hijack_netrw_behavior = "disabled",
+    },
   },
 }

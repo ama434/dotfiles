@@ -57,6 +57,11 @@ return {
       extensions = {
         file_browser = {
           hijack_netrw = true,
+          hidden = {
+            file_browser = true,
+            folder_browser = true,
+          },
+          respect_gitignore = false,
         },
         fzf = {
           fuzzy = true,
