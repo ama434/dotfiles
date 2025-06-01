@@ -1,6 +1,7 @@
 # font settings
 font-family = "JetBrainsMono Nerd Font"
-# font-family = "UDEV Gothic NFLG"
+font-family = "Noto Sans JP"
+font-style-bold = "ExtraBold"
 font-size = 12
 font-feature = "cv01"
 font-feature = "cv08"
@@ -10,6 +11,9 @@ font-feature = "cv12"
 font-feature = "cv20"
 font-feature = "zero"
 font-feature = "-dlig"
+
+# letter-spacing settings
+adjust-cell-width = -10%
 
 # background settings
 background-opacity = 0.92
