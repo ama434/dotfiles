@@ -60,6 +60,28 @@
 \usepackage{capt-of}
 \usepackage{lua-ul}
 
+% --- ソースコード ---
+\usepackage{listings,jvlisting}
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  commentstyle={\small\color{gray}\itshape},
+  numbers=left,
+  numberstyle={\scriptsize\color{gray}\ttfamily},
+  stepnumber=1,
+  numbersep=1em,
+  tabsize=2,
+  breaklines=true,
+  frame={tb},
+  xrightmargin=0em,
+  xleftmargin=3em,
+  lineskip=-0.5ex,
+  columns=[l]{fullflexible},
+}
+
 % --- アルゴリズム ---
 \usepackage{algorithm}
 \usepackage{algorithmic}

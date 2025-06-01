@@ -42,4 +42,5 @@ vim.keymap.set('n', 'tx', ':new<CR>:terminal<CR>')
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 
 -- <leader>nn で neo-tree を開閉
-vim.keymap.set('n', '<leader>nn', ':Neotree toggle<CR>')
+-- lua/plugins/neo-tree.lua で設定
+-- vim.keymap.set('n', '<leader>nn', ':Neotree toggle<CR>')

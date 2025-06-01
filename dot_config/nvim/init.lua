@@ -36,7 +36,7 @@ vim.opt.cursorline = true
 vim.cmd('hi clear CursorLine')
 vim.opt.list = true
 vim.opt.scrolloff = 10
-vim.opt.listchars = { tab = '|•', trail = '—', extends = '»', precedes = '«', nbsp = '%', eol = "" }
+vim.opt.listchars = { tab = '|•', trail = '·', extends = '»', precedes = '«', nbsp = '%' }
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
 vim.opt.breakindent = true
