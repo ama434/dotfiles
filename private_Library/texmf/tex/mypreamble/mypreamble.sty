@@ -25,7 +25,10 @@
   sans-style=upright,
   warnings-off={mathtools-colon,mathtools-overbracket}
 ]{unicode-math}
-\usepackage[per-mode=symbol]{siunitx}     % ← unicode-mathの後
+\usepackage[
+  per-mode=symbol,
+  range-phrase={--},
+  ]{siunitx}     % ← unicode-mathの後
 \usepackage[version=4]{mhchem}
 \usepackage{physics2}
 \usephysicsmodule{
@@ -100,7 +103,7 @@
 ]{hyperref}   % 必ず一番最後
 
 % --- TikZ/PGF 設定 ---
-\usetikzlibrary{arrows,shapes,positioning,calc,decorations.pathmorphing,shapes.geometric,shapes.misc}
+\usetikzlibrary{arrows.meta,shapes,positioning,calc,decorations.pathmorphing,shapes.geometric,shapes.misc,intersections}
 \pgfplotsset{compat=1.18}
 
 % --- 数式・ラベル ---
@@ -109,7 +112,7 @@
 % --- カスタムコマンド ---
 
 % \emph{} を太字のサンセリフ体に変更
-\renewcommand{\emph}[1]{\textbf{\textsf{#1}}}
+\renewcommand{\emph}[1]{\textsf{\textbf{#1}}}
 
 % 太さを変えられる罫線
 \newcommand{\bhline}[1]{\noalign{\hrule height #1}}
