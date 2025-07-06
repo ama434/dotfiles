@@ -28,13 +28,14 @@
 \usepackage[
   per-mode=symbol,
   range-phrase={--},
+  list-final-separator = {, }
   ]{siunitx}     % ← unicode-mathの後
 \usepackage[version=4]{mhchem}
 \usepackage{physics2}
 \usephysicsmodule{
   ab, diagmat, xmat, bm-um.legacy, nabla.legacy, op.legacy
 }
-\usepackage{diffcoeff}
+\usepackage{diffcoeff}[=v4]
 \usepackage{systeme}
 
 % --- 欧文・数式フォント指定 ---
@@ -49,7 +50,7 @@
 
 % --- 表・箇条書き ---
 \usepackage{tabularray}
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 \usepackage{float}
 \usepackage{calc}
 
@@ -59,29 +60,37 @@
 \usepackage{circuitikz}
 
 % --- 装飾・枠組み ---
+\usepackage{fancyhdr}
+\usepackage{fancybox}
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
 \usepackage{capt-of}
 \usepackage{lua-ul}
 
 % --- ソースコード ---
 \usepackage{listings,jvlisting}
 \lstset{
-  basicstyle={\ttfamily},
+  basicstyle={\small\ttfamily},
   identifierstyle={\small},
   keywordstyle={\small\bfseries},
   ndkeywordstyle={\small},
   stringstyle={\small\ttfamily},
   commentstyle={\small\color{gray}\itshape},
-  numbers=left,
+  % numbers=left,
+  numbers=none,
   numberstyle={\scriptsize\color{gray}\ttfamily},
+  showstringspaces=false,
+  keepspaces=true,
   stepnumber=1,
   numbersep=1em,
   tabsize=2,
   breaklines=true,
-  frame={tb},
+  % frame={tb},
+  frame={tblr},
   xrightmargin=0em,
-  xleftmargin=3em,
-  lineskip=-0.5ex,
+  % xleftmargin=3em,
+  xleftmargin=0em,
+  lineskip=-0.1ex,
   columns=[l]{fullflexible},
 }
 
@@ -112,7 +121,7 @@
 % --- カスタムコマンド ---
 
 % \emph{} を太字のサンセリフ体に変更
-\renewcommand{\emph}[1]{\textsf{\textbf{#1}}}
+\RenewDocumentCommand\emph{m}{\textsf{\textbf{#1}}}
 
 % 太さを変えられる罫線
 \newcommand{\bhline}[1]{\noalign{\hrule height #1}}
@@ -134,5 +143,28 @@
   \fi
 }
 
+% インラインコード
+\newtcbox{\tccode}[1][]{
+  colback=gray!10!white,
+  colframe=gray!12!white,
+  boxrule=1pt,
+  left=0mm,right=0mm,top=0mm,bottom=0mm,
+  box align=base,
+  nobeforeafter,
+  fontupper=\ttfamily,
+}
+
+\newcommand*{\code}[1]{%
+  \tccode{\lstinline[xleftmargin=0em]{#1}}%
+}
+
+% 箇条書きのラベルのあとのスペースを1emに
+\setlength{\labelsep}{1em}
+
 % キャプションの下に 6pt のスペースを追加
 \setlength{\belowcaptionskip}{6pt}
+
+% 穴埋めを作成
+\NewDocumentCommand\anaume{m}{%
+  {\setlength{\fboxsep}{0pt}\framebox[4\zw][c]{\small \mbox{#1}}}%
+}
