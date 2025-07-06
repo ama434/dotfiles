@@ -44,3 +44,6 @@ vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 -- <leader>nn で neo-tree を開閉
 -- lua/plugins/neo-tree.lua で設定
 -- vim.keymap.set('n', '<leader>nn', ':Neotree toggle<CR>')
+
+-- <leader>cc で Claude Code を開閉
+vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })
