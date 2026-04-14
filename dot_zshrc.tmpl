@@ -1,5 +1,6 @@
-
+# zmodload zsh/zprof # プロファイリング
 export LANG=ja_JP.UTF-8
+export XDG_CONFIG_HOME="$HOME/.config"
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
@@ -7,19 +8,135 @@ setopt share_history # 複数ターミナルでヒストリを共有
 setopt hist_ignore_space # スペースで始まるコマンドをヒストリに保存しない
 setopt nonomatch
 
-# aliases
+# ------- Zsh Options -------
+
+# cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':completion:*' recent-dirs-insert both
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/shell/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-pushd true
+
+# ------- completion -------
+
+# compsys を有効化
+# .zcompdump が更新されていれば再初期化、そうでなければ当日更新済みとしてスキップ
+_compinit() {
+  local re_initialize=0
+  for match in ${ZDOTDIR}/.zcompdump*(.Nmh+24); do
+    re_initialize=1
+    break
+  done
+
+  autoload -Uz compinit
+  if [ "$re_initialize" -eq "1" ]; then
+    compinit
+    # update the timestamp on compdump file
+    compdump
+  else
+    # omit the check for new functions since we updated today
+    compinit -C
+  fi
+}
+_compinit
+
+# メニュー補完に色をつける
+zstyle ':completion:*:default' list-colors
+
+# ------- aliases -------
+
+# モダンツールで置換
 alias ls='eza -F'
-alias ll='eza -F -algh --git --icons'
-alias vim='nvim'
-alias vi='vim'
+alias ll='eza -F -algh --git --icons --time-style=long-iso'
+alias tree='eza -T'
 alias vimdiff='nvim -d'
 alias cat='bat -pP'
-alias :q='exit'
 
-mkcd() {
-    mkdir "$*" && cd "$1"
+# 短縮コマンド
+alias c='pbcopy'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias ched='chezmoi edit'
+alias lmc='latexmk -c'
+
+# 安全対策
+alias cp='cp -i'
+alias mv='mv -i'
+if command -v trash &> /dev/null; then
+  alias rm='trash'
+else
+  alias rm='rm -i'
+fi
+
+# 思想
+alias :q='exit'
+alias gcc='/opt/homebrew/bin/gcc-15'
+alias g++='/opt/homebrew/bin/g++-15'
+
+# うるさいコマンドを静かにする
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+alias ffplay='ffplay -hide_banner'
+
+# 直前のコマンドとその実行結果をpbcopyする
+cpc() {
+  local cmd=$(fc -ln -1 | sed 's/^[[:space:]]*//')
+  if [[ -n "$cmd" ]]; then
+    {
+      echo "\$ $cmd"
+      eval "$cmd" 2>&1
+    } | tee >(pbcopy)
+  fi
 }
 
+# mkdir して cd
+mkcd() {
+  mkdir "$*" && cd "$1"
+}
+
+# 現在のディレクトリから1層下まででストレージの占有率を出す
+dudu() {
+  du -d1 -h . | sort -hr | csview -H -t
+}
+
+# fzf で ghq を検索
+function ghq-fzf() {
+  local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  if [ -n "$src" ]; then
+    BUFFER="cd $(ghq root)/$src"
+    zle accept-line
+  fi
+  zle -R -c
+}
+zle -N ghq-fzf
+bindkey '^g' ghq-fzf
+
+# fzf でヒストリを検索
+function fzf-select-history() {
+  BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^r' fzf-select-history
+
+# fzf でディレクトリを検索
+function fzf-cdr() {
+  local selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --reverse)
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N fzf-cdr
+setopt noflowcontrol
+bindkey '^q' fzf-cdr
+
+# -----------------------
 
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
@@ -37,16 +154,29 @@ export PATH="$PATH:/Users/ama_434/.local/bin"
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
+  if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+    . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+  fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 # shell scripts
 export PATH="$HOME/bin:$PATH"
+
+export PATH="/opt/homebrew/opt/tcl-tk/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/lib -L/opt/homebrew/opt/tcl-tk/lib"
+export CPPFLAGS="-I/opt/homebrew/include -I/opt/homebrew/opt/tcl-tk/include"
+export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:/opt/homebrew/opt/tcl-tk/lib/pkgconfig"
+export TCL_LIBRARY="/opt/homebrew/opt/tcl-tk/lib/tcl8.6"
+
+source /Users/ama_434/.config/broot/launcher/bash/br
+
+# zprof
+
+# Added by Antigravity
+export PATH="/Users/ama_434/.antigravity/antigravity/bin:$PATH"

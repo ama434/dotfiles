@@ -18,6 +18,7 @@ require("autocmds")
 -- encoding
 vim.opt.encoding = 'utf-8'
 vim.scriptencoding = 'utf-8'
+vim.opt.fileencodings = { 'utf-8', 'cp932', 'euc-jp', 'sjis' }
 
 -- indent
 vim.opt.tabstop = 2
@@ -36,14 +37,14 @@ vim.opt.cursorline = true
 vim.cmd('hi clear CursorLine')
 vim.opt.list = true
 vim.opt.scrolloff = 10
-vim.opt.listchars = { tab = '|•', trail = '·', extends = '»', precedes = '«', nbsp = '%' }
+vim.opt.listchars = { tab = '░»', trail = '·', extends = '»', precedes = '«', nbsp = '%' }
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
 vim.opt.breakindent = true
 vim.opt.showbreak = '» '
 
 -- color
-vim.cmd.colorscheme "catppuccin-mocha"
+-- vim.cmd.colorscheme "catppuccin-mocha"
 
 -- search
 vim.opt.incsearch = true
@@ -64,6 +65,8 @@ vim.opt.sh = "zsh"
 -- PATH
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+-- exrc: プロジェクトローカルの .nvim.lua を読み込む
+vim.opt.exrc = true
 
 -- show diagnostics info
 vim.diagnostic.config({

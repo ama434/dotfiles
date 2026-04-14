@@ -9,7 +9,7 @@ $pdf_mode = 4;
 $makeindex = 'upmendex %O -o %D %S';
 
 if ($^O eq 'darwin') {
-  $pdf_previewer = 'open -ga /Applications/Skim/app';
+  $pdf_previewer = 'open -ga /Applications/Skim.app';
 } elsif ($^O eq 'linux') {
   $pdf_previewer = 'evince';
 }

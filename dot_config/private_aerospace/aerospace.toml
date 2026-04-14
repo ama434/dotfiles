@@ -201,3 +201,23 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.colliderli.iina"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.aone.keka"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "org.torproject.torbrowser"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Music"
+  run = "layout floating"

@@ -13,18 +13,21 @@ font-feature = "zero"
 font-feature = "-dlig"
 
 # letter-spacing settings
-adjust-cell-width = -10%
+# adjust-cell-width = 10%
 
 # background settings
-background-opacity = 0.92
-background-blur = 6
+background-opacity = 0.85
+background-blur = 20
 
 # macOS settings
-macos-icon = "official"
+# macos-icon = "official"
 macos-titlebar-proxy-icon = "hidden"
 
+# bell settings
+bell-features = system, attention, title
+
 # color theme settings
-theme = "catppuccin-mocha.conf"
+theme = "Vague"
 # installed themes:
 # - vague
 #
@@ -33,11 +36,15 @@ theme = "catppuccin-mocha.conf"
 window-height = 40
 window-width = 144
 macos-non-native-fullscreen = "visible-menu"
+quick-terminal-size = 34%
 
 # padding
 window-padding-x = 0
 window-padding-y = 0,0
 window-padding-balance = true
+
+# keybinds
+keybind = global:cmd+backquote=toggle_quick_terminal
 
 # other settings
 link-url

@@ -12,7 +12,7 @@ vim.keymap.set('n', '<C-j>', ':bp<CR>')
 vim.keymap.set('n', '<C-k>', ':bn<CR>')
 
 -- 行末移動
-vim.keymap.set('n', '<Space>l', '$')
+vim.keymap.set('n', '<space>l', '$')
 vim.keymap.set('v', '<Space>l', '$')
 
 -- U で Redo
@@ -39,7 +39,7 @@ vim.keymap.set('n', 'tt', ':terminal<CR>')
 vim.keymap.set('n', 'tx', ':new<CR>:terminal<CR>')
 
 -- ターミナルモードで <ESC> で normal モードに入れるように
-vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
+-- vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 
 -- <leader>nn で neo-tree を開閉
 -- lua/plugins/neo-tree.lua で設定
