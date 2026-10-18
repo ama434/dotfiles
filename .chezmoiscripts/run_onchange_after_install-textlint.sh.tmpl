@@ -1,0 +1,15 @@
+#!/bin/bash
+# ~/.config/textlint の package-lock.json が変わったら node_modules を作り直す。
+# package-lock.json hash: {{ include "dot_config/textlint/package-lock.json" | sha256sum }}
+set -euo pipefail
+
+cd "$HOME/.config/textlint"
+if command -v mise >/dev/null 2>&1; then
+  mise exec -- npm ci --no-audit --no-fund
+elif command -v npm >/dev/null 2>&1; then
+  npm ci --no-audit --no-fund
+else
+  # 失敗させておけば、Node.js を入れた後の chezmoi apply で再実行される
+  echo "npm が見つかりません。Node.js を入れてから chezmoi apply をやり直してください" >&2
+  exit 1
+fi

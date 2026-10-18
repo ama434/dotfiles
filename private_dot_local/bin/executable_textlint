@@ -1,0 +1,45 @@
+#!/bin/bash
+# textlint のラッパー。nvim（none-ls）と同じ規則で本体・設定・ルールを選ぶ。
+#   本体: カレントディレクトリから上にたどった node_modules/.bin/textlint、なければ共通環境のもの
+#   設定: 上にたどって .textlintrc* があればそれ、なければ共通環境の設定
+#   ルール: プロジェクトの node_modules になければ共通環境から解決する
+set -euo pipefail
+
+textlint_home="$HOME/.config/textlint"
+export NODE_PATH="$textlint_home/node_modules${NODE_PATH:+:$NODE_PATH}"
+
+# カレントディレクトリから上にたどって、引数のいずれかが存在する最初のディレクトリのパスを出力する
+find_upward() {
+  local dir="$PWD" name
+  while :; do
+    for name in "$@"; do
+      if [[ -e "$dir/$name" ]]; then
+        echo "$dir/$name"
+        return 0
+      fi
+    done
+    [[ "$dir" == / ]] && return 1
+    dir="$(dirname "$dir")"
+  done
+}
+
+if local_bin="$(find_upward node_modules/.bin/textlint)"; then
+  exec "$local_bin" "$@"
+fi
+
+bin="$textlint_home/node_modules/.bin/textlint"
+if [[ ! -x "$bin" ]]; then
+  echo "textlint: $bin がありません。cd $textlint_home && npm ci を実行してください" >&2
+  exit 1
+fi
+
+# 設定ファイルを明示していないときだけ共通の設定を補う
+for arg in "$@"; do
+  if [[ "$arg" == "--config" || "$arg" == --config=* || "$arg" == "-c" ]]; then
+    exec "$bin" "$@"
+  fi
+done
+if find_upward .textlintrc .textlintrc.json .textlintrc.yml .textlintrc.yaml .textlintrc.js .textlintrc.cjs >/dev/null; then
+  exec "$bin" "$@"
+fi
+exec "$bin" --config "$textlint_home/.textlintrc.json" "$@"

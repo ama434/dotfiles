@@ -1,0 +1,11 @@
+{
+  "name": "textlint-global",
+  "private": true,
+  "description": "プロジェクトに textlint がないときに使う共通の textlint 環境",
+  "devDependencies": {
+    "@textlint-ja/textlint-rule-preset-ai-writing": "^1.7.0",
+    "textlint": "^15.8.0",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.2",
+    "textlint-rule-preset-japanese": "^10.0.4"
+  }
+}
