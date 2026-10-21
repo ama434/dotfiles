@@ -7,6 +7,8 @@ SAVEHIST=1000000
 setopt share_history # 複数ターミナルでヒストリを共有
 setopt hist_ignore_space # スペースで始まるコマンドをヒストリに保存しない
 setopt nonomatch
+setopt transient_rprompt # 右プロンプトは現在の行にだけ表示する
+ZLE_RPROMPT_INDENT=0 # 右プロンプトと右端の間に zsh が空ける 1 列をなくす
 
 # ------- Zsh Options -------
 
@@ -49,6 +51,9 @@ zstyle ':completion:*:default' list-colors
 
 export EDITOR='nvim'
 export VISUAL='nvim'
+
+# Vim キーバインド（EDITOR に vi を含むと暗黙に有効になるが、明示しておく）
+bindkey -v
 
 # ------- aliases -------
 

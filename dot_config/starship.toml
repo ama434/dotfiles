@@ -1,146 +1,112 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# 左: 場所と git だけ。右: その場で意味のある情報だけが現れる。
 format = """
-[](blue)\
-[󰀵](bg:blue fg:base)\
 $username\
-[](bg:surface1 fg:blue)\
+$hostname\
 $directory\
-[](fg:surface1 bg:surface0)\
 $git_branch\
+$git_state\
 $git_status\
-[](fg:surface0)\
-$c\
+$character"""
+
+right_format = """
+$cmd_duration\
+$status\
+$jobs\
+$python\
+$conda\
+$nodejs\
 $rust\
 $golang\
-$nodejs\
-$php\
+$c\
+$lua\
 $java\
 $kotlin\
 $haskell\
-$python\
+$php\
 $bun\
 $deno\
-$lua\
 $swift\
 $zig\
-[](fg:surface0)\
-$docker_context\
-$conda\
-[](fg:surface1 bg:surface0)\
-$time\
-[ ](fg:surface1)\
-$line_break$character"""
-
-palette = 'catppuccin_mocha'
-
-[palettes.gruvbox_dark]
-color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#689d6a'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-
-# os モジュールは macOS で sw_vers を起動するため約 18ms かかるが、
-# 出力は常に同じ Apple ロゴなので format にリテラルで直書きしている。
-# 以下の [os.symbols] は無効化中のモジュール用に残してあるだけ。
-[os]
-disabled = true
-style = "bg:blue fg:base"
-
-[os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-Pop = ""
+$docker_context"""
 
 [username]
-show_always = true
-style_user = "bold bg:blue fg:base"
-style_root = "bold bg:blue fg:base"
-format = '[ $user ]($style)'
+style_user = "fg:yellow"
+style_root = "bold fg:red"
+format = '[$user]($style) '
+
+[hostname]
+ssh_only = true
+style = "fg:yellow"
+format = '[at $hostname]($style) '
 
 [directory]
-style = "fg:text bg:surface1"
-format = "[ $path ]($style)"
+style = "bold fg:cyan"
+read_only = " 󰌾"
+read_only_style = "fg:red"
 truncation_length = 3
 truncation_symbol = "…/"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+format = '[$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
-symbol = ""
-style = "bg:surface0"
-format = '[[ $symbol $branch ](fg:text bg:surface0)]($style)'
+style = "fg:white"
+format = '[$branch]($style) '
 
+[git_state]
+style = "fg:yellow"
+format = '[\($state( $progress_current/$progress_total)\)]($style) '
+
+# 種類ごとの件数を出す。変更がなければ何も出ない
 [git_status]
-style = "bg:surface0"
-format = '[[($all_status$ahead_behind )](fg:text bg:surface0)]($style)'
+style = "fg:yellow"
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = '=${count}'
+stashed = '≡${count}'
+deleted = '✘${count}'
+renamed = '»${count}'
+modified = '!${count}'
+staged = '+${count}'
+untracked = '?${count}'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇡${ahead_count}⇣${behind_count}'
+
+[character]
+success_symbol = '[❯](bold fg:purple)'
+error_symbol = '[✗ ❯](bold fg:red)'
+vimcmd_symbol = '[](bold fg:green)'
+vimcmd_replace_one_symbol = '[](bold fg:cyan)'
+vimcmd_replace_symbol = '[](bold fg:cyan)'
+vimcmd_visual_symbol = '[](bold fg:yellow)'
+
+# 2 秒以上かかったコマンドだけ
+[cmd_duration]
+min_time = 2000
+style = "fg:yellow"
+format = '[$duration]($style) '
+
+# 失敗したときだけ終了コードを出す
+[status]
+disabled = false
+style = "fg:red"
+format = '[✘ $status( $signal_name)]($style) '
+
+[jobs]
+style = "fg:blue"
+format = '[$symbol$number]($style) '
 
 [nodejs]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [c]
 symbol = ""
-style = ""
-format = '[[ $symbol( $name $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $name $version)]($style) '
+version_format = '${major}.${minor}'
 
 # [cpp]
 # symbol = ""
@@ -150,88 +116,82 @@ format = '[[ $symbol( $name $version) ](fg:text)]($style)'
 
 [rust]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [golang]
 symbol = "󰟓"
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [php]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [java]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [kotlin]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [haskell]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [python]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)( \($virtualenv\))]($style) '
+version_format = '${major}.${minor}'
 
 [bun]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [deno]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [lua]
 symbol = "󰢱"
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [swift]
 symbol = "󰛥"
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [zig]
 symbol = ""
-style = ""
-format = '[[ $symbol( $version) ](fg:text)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $version)]($style) '
+version_format = '${major}.${minor}'
 
 [docker_context]
 symbol = ""
-style = "bg:surface0"
-format = '[[ $symbol( $context) ](fg:text bg:surface0)]($style)'
+style = "fg:bright-black"
+format = '[$symbol( $context)]($style) '
 
 [conda]
 symbol = ''
-style = "bg:surface0"
-format = '[[ $symbol( $environment) ](fg:text bg:surface0)]($style)'
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:surface1"
-format = '[[  $time ](fg:text bg:surface1)]($style)'
-
-[line_break]
-disabled = false
-
-[character]
-disabled = false
-success_symbol = '[](bold fg:2)'
-error_symbol = '[](bold fg:9)'
-vimcmd_symbol = '[](bold fg:2)'
-vimcmd_replace_one_symbol = '[](bold fg:6)'
-vimcmd_replace_symbol = '[](bold fg:6)'
-vimcmd_visual_symbol = '[](bold fg:3)'
+style = "fg:bright-black"
+format = '[$symbol( $environment)]($style) '
