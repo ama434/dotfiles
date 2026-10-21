@@ -15,6 +15,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor,luacolor}
 \usepackage{multicol}
+\usepackage{microtype}
 
 % --- 数式・理科系 ---
 \usepackage{mathtools}
@@ -26,6 +27,8 @@
   warnings-off={mathtools-colon,mathtools-overbracket}
 ]{unicode-math}
 \usepackage[
+  group-digits=none,
+  mode=match,
   per-mode=symbol,
   range-phrase={--},
   list-final-separator = {, }
@@ -53,6 +56,7 @@
 \usepackage[inline]{enumitem}
 \usepackage{float}
 \usepackage{calc}
+\usepackage{seqsplit}
 
 % --- 描画・図表 ---
 \usepackage{tikz}
@@ -64,7 +68,15 @@
 \usepackage{fancybox}
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable,skins}
+\usepackage{caption}
+\DeclareCaptionFont{gb}{\sffamily\gtfamily\bfseries}
+\captionsetup{
+  font = small,
+  labelfont = gb,
+  textfont = sf,
+}
 \usepackage{capt-of}
+\usepackage{subcaption}
 \usepackage{lua-ul}
 
 % --- ソースコード ---
