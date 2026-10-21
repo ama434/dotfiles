@@ -16,12 +16,13 @@ font-feature = "-dlig"
 # adjust-cell-width = 10%
 
 # background settings
-background-opacity = 0.85
-background-blur = 20
+background-opacity = 0.75
+background-blur = 30
 
 # macOS settings
-# macos-icon = "official"
+macos-icon = "official"
 macos-titlebar-proxy-icon = "hidden"
+# macos-window-shadow = false
 
 # bell settings
 bell-features = system, attention, title
@@ -36,7 +37,9 @@ theme = "Vague"
 window-height = 40
 window-width = 144
 macos-non-native-fullscreen = "visible-menu"
-quick-terminal-size = 34%
+quick-terminal-position = top
+quick-terminal-size = 45%,50%
+quick-terminal-animation-duration = 0.15
 
 # padding
 window-padding-x = 0
@@ -47,4 +50,4 @@ window-padding-balance = true
 keybind = global:cmd+backquote=toggle_quick_terminal
 
 # other settings
-link-url
+# link-url
