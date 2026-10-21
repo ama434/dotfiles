@@ -25,7 +25,7 @@ zstyle ':chpwd:*' recent-dirs-pushd true
 # .zcompdump が更新されていれば再初期化、そうでなければ当日更新済みとしてスキップ
 _compinit() {
   local re_initialize=0
-  for match in ${ZDOTDIR}/.zcompdump*(.Nmh+24); do
+  for match in ${ZDOTDIR:-$HOME}/.zcompdump*(.Nmh+24); do
     re_initialize=1
     break
   done
@@ -45,6 +45,11 @@ _compinit
 # メニュー補完に色をつける
 zstyle ':completion:*:default' list-colors
 
+# ------- editor --------
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 # ------- aliases -------
 
 # モダンツールで置換
@@ -61,6 +66,7 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias ched='chezmoi edit'
 alias lmc='latexmk -c'
+alias qwen='llama-server -hf HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive:IQ3_M --jinja -c 32768'
 
 # 安全対策
 alias cp='cp -i'
@@ -77,9 +83,9 @@ alias gcc='/opt/homebrew/bin/gcc-15'
 alias g++='/opt/homebrew/bin/g++-15'
 
 # うるさいコマンドを静かにする
-alias ffmpeg='ffmpeg -hide_banner'
-alias ffprobe='ffprobe -hide_banner'
-alias ffplay='ffplay -hide_banner'
+# alias ffmpeg='ffmpeg -hide_banner'
+# alias ffprobe='ffprobe -hide_banner'
+# alias ffplay='ffplay -hide_banner'
 
 # 直前のコマンドとその実行結果をpbcopyする
 cpc() {
@@ -141,6 +147,10 @@ bindkey '^q' fzf-cdr
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
+# mise の環境が変わる契機はディレクトリ移動なので chpwd フックだけで足りる。
+# precmd フックはコマンドを打つたびに約 30ms かかるうえ冗長なので外す。
+# mise.toml をその場で書き換えたときは `cd .` で反映する。
+add-zsh-hook -d precmd _mise_hook_precmd
 eval "$(zoxide init zsh)"
 
 # Set up fzf key bindings
@@ -148,21 +158,28 @@ source <(fzf --zsh)
 
 # Created by `pipx` on 2025-04-10 10:12:48
 export PATH="$PATH:/Users/ama_434/.local/bin"
+
 # export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-    . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+# 本来の初期化は 500ms かかるうえ、auto_activate_base: false のため
+# conda 関数を定義する以外に何もしない。初回の conda 呼び出しまで遅延させる。
+conda() {
+  unfunction conda
+  __conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
   else
-    export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+      . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+      export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
   fi
-fi
-unset __conda_setup
+  unset __conda_setup
+  conda "$@"
+}
 # <<< conda initialize <<<
 
 # shell scripts

@@ -2,7 +2,7 @@
 
 format = """
 [](blue)\
-$os\
+[󰀵](bg:blue fg:base)\
 $username\
 [](bg:surface1 fg:blue)\
 $directory\
@@ -74,8 +74,11 @@ base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
 
+# os モジュールは macOS で sw_vers を起動するため約 18ms かかるが、
+# 出力は常に同じ Apple ロゴなので format にリテラルで直書きしている。
+# 以下の [os.symbols] は無効化中のモジュール用に残してあるだけ。
 [os]
-disabled = false
+disabled = true
 style = "bg:blue fg:base"
 
 [os.symbols]

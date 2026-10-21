@@ -4,4 +4,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Created by `pipx` on 2025-04-10 10:12:48
 export PATH="$PATH:/Users/ama_434/.local/bin"
 
-eval "$(mise activate zsh --shims)"
+# mise の shims は .zshenv へ移動した（.zprofile はログインシェルしか読まないため）
+
+# Added by Obsidian
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"

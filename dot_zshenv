@@ -1,2 +1,14 @@
 
+# PATH の重複エントリを自動で排除する。すべての zsh で効かせたいのでここに置く。
+typeset -U path PATH
+
+# mise の shims。
+# 非対話・非ログインシェル（スクリプト、cron など）は .zshenv しか読まないため、
+# ここに置かないとそれらにツールのパスが通らない（.zprofile では届かない）。
+# `mise activate --shims` の出力は PATH を足すだけなので、
+# zsh の起動ごとにサブプロセスを増やさないよう直接書く。
+# 対話シェルでは .zshrc の `mise activate zsh` が実体のパスを前に出すため、
+# shim のオーバーヘッド（1回あたり約 20ms）は掛からない。
+path=("$HOME/.local/share/mise/shims" $path)
+
 . "$HOME/.cargo/env"
