@@ -45,7 +45,15 @@ _compinit() {
 _compinit
 
 # メニュー補完に色をつける
-zstyle ':completion:*:default' list-colors
+if (( $+commands[vivid] )); then
+  export LS_COLORS="$(vivid generate ansi)"
+else
+  eval "$(gdircolors)"
+fi
+zmodload zsh/complist
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" 'ma=7'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*'
 
 # ------- editor --------
 
@@ -54,6 +62,16 @@ export VISUAL='nvim'
 
 # Vim キーバインド（EDITOR に vi を含むと暗黙に有効になるが、明示しておく）
 bindkey -v
+
+# Shift-Tab で補完候補を逆順に移動する
+bindkey '^[[Z' reverse-menu-complete
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# 補完メニューを hjkl で移動する
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
 
 # ------- aliases -------
 
